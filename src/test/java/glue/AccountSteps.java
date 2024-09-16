@@ -28,7 +28,7 @@ public class AccountSteps {
         List<List<String>> exampleDataTable = data.asLists();
         for (List<String> row : exampleDataTable) {
             // Row 0 is transaction ID, row 1 is deposit amount
-            account.deposit(row.get(0), row.get(1));
+            account.deposit(row.get(0), Integer.parseInt(row.get(1)));
         }
     }
 
@@ -37,7 +37,7 @@ public class AccountSteps {
         List<List<String>> exampleDataTable = data.asLists();
         for (List<String> row : exampleDataTable) {
             // Row 0 is transaction ID, row 1 is withdrawal amount
-            account.withdraw(row.get(0),row.get(1));
+            account.withdraw(row.get(0),Integer.parseInt(row.get(1)));
         }
     }
 
