@@ -10,4 +10,16 @@ public class Transaction {
         this.amount = amount;
         this.type = type;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
 }

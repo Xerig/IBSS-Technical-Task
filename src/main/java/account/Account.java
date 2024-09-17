@@ -36,6 +36,19 @@ public class Account {
 
 
     public String statement() {
-        return String.format("Name: %s%nAccount: %d%nBalance: %.2f", name, number, balance);
+        StringBuilder statement = new StringBuilder();
+        String symbol;
+        statement.append(String.format("Name: %s%nAccount: %d%nBalance: %.2f%nTransactions:", name, number, balance));
+        for (Transaction transaction : transactions) {
+            // Positive and negative signs indicate if the transaction was a
+            // withdrawal or a deposit.
+            if (transaction.getType() == TransactionType.WITHDRAWAL) {
+                symbol = "-";
+            } else {
+                symbol = "+";
+            }
+            statement.append(String.format("%n|%s|%s%.2f|", transaction.getId(), symbol, transaction.getAmount()));
+        }
+        return statement.toString();
     }
 }
