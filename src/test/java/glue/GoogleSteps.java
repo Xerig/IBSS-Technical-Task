@@ -29,10 +29,7 @@ public class GoogleSteps {
 
     @When("About page is shown")
     public void aboutPageIsShown() {
-        try {
-            W.get().driver.findElement(By.linkText("About")).click();
-        } catch (NoSuchElementException ignored) {
-        }
+        W.get().driver.findElement(By.linkText("About")).click();
     }
 
     @Then("page displays {string}")
