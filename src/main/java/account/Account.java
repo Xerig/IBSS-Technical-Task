@@ -33,4 +33,9 @@ public class Account {
         transactions.add(new Transaction(id, amount, TransactionType.DEPOSIT));
         balance += amount;
     }
+
+
+    public String statement() {
+        return String.format("Name: %s%nAccount: %d%nBalance: %.2f", name, number, balance);
+    }
 }
