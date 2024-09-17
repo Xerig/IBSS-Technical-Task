@@ -15,12 +15,11 @@ import java.util.List;
 public class AccountSteps {
 
     Account account = null;
+    String statement = null;
 
     @Given("^Account exists for Acc No\\. \"([^\"]*)\" with Name \"([^\"]*)\"$")
     public void accountExistsForAccNoWithName(int number, String name) {
         account = new Account(number,name);
-        Assert.assertEquals(number, account.getNumber());
-        Assert.assertEquals(name, account.getName());
     }
 
     @And("deposits are made")
@@ -43,11 +42,11 @@ public class AccountSteps {
 
     @When("statement is produced")
     public void statementIsProduced() {
-        //account.statement();
+        statement = account.statement();
     }
 
     @Then("statement includes {string}")
-    public void statementIncludes(String arg0) {
-
+    public void statementIncludes(String stringToFind) {
+        Assert.assertTrue(statement.contains(stringToFind));
     }
 }
