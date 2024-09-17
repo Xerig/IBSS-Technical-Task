@@ -41,5 +41,27 @@ public class GoogleSteps {
         Assert.assertTrue(allBodyText.contains(textToFind));
     }
 
+    @When("searching for {string}")
+    public void searchingFor(String query) {
+        // Find search textarea
+        WebElement textarea = W.get().driver.findElement(By.cssSelector("#APjFqb"));
+        // Enter search term
+        textarea.sendKeys(query);
+        // Send enter to search
+        textarea.sendKeys(Keys.RETURN);
+    }
+
+    @Then("results contain {string}")
+    public void resultsContain(String textToFind) {
+        String allBodyText = W.get().driver.findElement(By.tagName("body")).getText();
+        Assert.assertTrue(allBodyText.contains(textToFind));
+    }
+
+    @And("result stats are displayed")
+    public void resultStatsAreDisplayed() {
+        W.get().driver.findElement(By.cssSelector("#hdtb-tls")).click();
+    }
+
+
 
 }
