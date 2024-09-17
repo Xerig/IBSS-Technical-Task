@@ -10,6 +10,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class GoogleSteps {
 
     @Given("url {string} is launched")
@@ -62,6 +64,16 @@ public class GoogleSteps {
         W.get().driver.findElement(By.cssSelector("#hdtb-tls")).click();
     }
 
-
+    @And("number of {string} is more than {double}")
+    public void numberOfIsMoreThan(String numberLabel, double num) {
+        String resultsStats = W.get().driver.findElement(By.cssSelector("#result-stats")).getText();
+        // Remove brackets and commas from result, split it into an array of single words/numbers
+        // using a space delimiter, and then convert it into a List.
+        List<String> resultsStatsSplit = List.of(resultsStats.replaceAll("[(),]", "").split(" "));
+        int indexOfLabel = resultsStatsSplit.indexOf(numberLabel);
+        // Get the number that appears directly before the word describing the number desired.
+        double numberFound = Double.parseDouble(resultsStatsSplit.get(indexOfLabel - 1));
+        Assert.assertTrue(numberFound > num);
+    }
 
 }
