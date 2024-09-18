@@ -14,23 +14,27 @@ Feature: The user can change their own password
       When the user enters "new1" into the "New Password" box
       And the user enters "new1" into the "Verify Password" box
       And the new password is valid
+      And the submit button is clicked
       Then the users password can be updated
 
     Scenario: Users new passwords do not match
       When the user enters "new1" into the "New Password" box
       And the user enters "new2" into the "Verify Password" box
+      And the submit button is clicked
       Then an error message is displayed stating "Passwords do not match"
       And users password is not updated
 
     Scenario: User enters valid new password
-      When the new password is identical in both boxes
+      When the new password "new1" is identical in both boxes
       And the new password is more than 2 characters
       And the new password contains at least 1 number
+      And the submit button is clicked
       Then the users password can be updated
 
     Scenario Outline: User enters invalid new password
-      When the new password is identical in both boxes
+      When the new password "no" is identical in both boxes
       And the new password is <Invalid password>
+      And the submit button is clicked
       Then an error message is displayed
       And the users password is not updated
       Examples:
