@@ -38,6 +38,6 @@ Feature: The user can change their own password
       Then an error message is displayed
       And the users password is not updated
       Examples:
-        | Invalid password            |
-        | less than 2 characters      |
-        | doesn't contain any numbers |
+        | Invalid password       |
+        | less than 3 characters |
+        | contains 0 numbers     |
