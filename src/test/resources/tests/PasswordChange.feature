@@ -11,10 +11,16 @@ Feature: The user can change their own password
       And password "password123" is entered into the password box
 
     Scenario: User enters new password into both boxes
-      Given the new password is valid
       When the user enters "new1" into the "New Password" box
       And the user enters "new1" into the "Verify Password" box
+      And the new password is valid
       Then the users password can be updated
+
+    Scenario: Users new passwords do not match
+      When the user enters "new1" into the "New Password" box
+      And the user enters "new2" into the "Verify Password" box
+      Then an error message is displayed stating "Passwords do not match"
+      And users password is not updated
 
     Scenario: User enters valid new password
       When the new password is identical in both boxes
@@ -22,8 +28,12 @@ Feature: The user can change their own password
       And the new password contains at least 1 number
       Then the users password can be updated
 
-    Scenario: User enters invalid new password
+    Scenario Outline: User enters invalid new password
       When the new password is identical in both boxes
-      And the new password is less than 2 characters
-      And the new password contains at least 1 number
-      Then an error message is displayed and the users password is not updated
+      And the new password is <Invalid password>
+      Then an error message is displayed
+      And the users password is not updated
+      Examples:
+        | Invalid password            |
+        | less than 2 characters      |
+        | doesn't contain any numbers |
